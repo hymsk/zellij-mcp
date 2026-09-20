@@ -1,0 +1,59 @@
+[build-system]
+requires = []
+build-backend = "zellij_mcp.build_backend"
+backend-path = ["."]
+
+[project]
+name = "zellij-mcp"
+version = "1.0.0rc1"
+description = "MCP server for zellij terminal workspace management"
+readme = "README.md"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.7"
+authors = [{ name = "hymsk", email = "lxj_hymsk@163.com" }]
+keywords = ["mcp", "terminal", "zellij", "claude", "codex", "opencode"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0,<8.0",
+    "pytest-cov>=4.0,<5.0",
+    "coverage>=7.0,<7.3",
+    "mypy>=1.0,<1.5",
+    "ruff>=0.16,<0.17",
+    "bandit>=1.7.5,<1.8",
+]
+
+[project.scripts]
+zellij-mcp = "zellij_mcp.cli:main"
+
+[tool.ruff]
+target-version = "py37"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "SIM"]
+# Keep existing .format() calls stable; UP032 is style-only and creates broad churn.
+ignore = ["UP032"]
+
+[tool.mypy]
+python_version = "3.7"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit"]
